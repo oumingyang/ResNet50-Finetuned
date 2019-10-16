@@ -1,6 +1,7 @@
 import os
 import json
 
+
 def get_file_path(root_path, dir_list, file_list):
     # get all of the dir and file fellow root_path
     dir_or_files = os.listdir(root_path)
@@ -21,36 +22,39 @@ def save_file_path(file_save_path, dir_list, file_list):
     dir_list: list save dir_path
     file_list: list save file_path
     """
-    
+    file_save_path = file_save_path + os.path.sep + "data.json"
+    label = 0
 
     # 
     for dir_path in dir_list:
+
+        category = dir_path.split("/")[-1]
+        
         file_in_dir = "file_in_" + dir_path
         file_in_dir = []
-
         for file_path in file_list:
             if dir_path in file_path:
-                file_in_dir.append(file_path)
-            else:
-                print("There is no file in:%s \n", dir_path)
+                file_in_dir.append(file_path.split("/")[-1])
+            # else:
+            #     print("There is no file in:%s \n", dir_path)
+        # print(dir_path + ":", file_in_dir)
         
-        json_str = json.dumps(file_list)
+        data = {
+            "category": category,
+            "label": label, 
+            "file_name": file_in_dir[:]
+        }
+        # print ("data is :", data)
+        label = label + 1
 
-    #
-    try:
-        file_save_list = open(file_save_path, "a+")
-        for file in file_list:
-            file_save_list.write(file)
+        # write Json data
+        with open(file_save_path, "a+") as fw:
+            json.dump(data, fw)
 
-    except IOError:
-        print("Error: file operation failed!")
-
-    else:
-        print("Success: file write in success!")
-        file_save_list.close()
-
-    
-
+    # read Json data
+    with open(file_save_path, "r") as fr:
+        json.load(f)
+        
 
 if __name__ == "__main__":
 
@@ -60,6 +64,7 @@ if __name__ == "__main__":
     file_list = []
     
     get_file_path(root_path, dir_list, file_list)
+    save_file_path(root_path, dir_list, file_list)
 
-    print("file_list of root path:", file_list)
-    print("dir_list of root_path:", dir_list)
+    # print("file_list of root path:", file_list)
+    # print("dir_list of root_path:", dir_list)
