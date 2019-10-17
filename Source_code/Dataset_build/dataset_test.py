@@ -9,10 +9,10 @@ if __name__ == '__main__':
   current_path = os.path.abspath(__file__)
   #Get current file father_dir
   father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
-  source_image_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".."),"Source_image")
-  mosaic_image_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".."),"Mosaic_image")
-  dataset_train_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".."),"Data_train")
-  dataset_valiate_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".."),"Data_valiate")
+  source_image_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "../.."),"Source_image")
+  mosaic_image_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "../.."),"Mosaic_image")
+  dataset_train_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "../.."),"Data_train")
+  dataset_valiate_path = os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "../.."),"Data_valiate")
 
   #Path of data and datasets
 
