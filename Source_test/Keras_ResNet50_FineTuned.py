@@ -17,6 +17,8 @@ records_per_class = 100
 # We will also use the same data for train/test and expect that Keras will give the same accuracy.
 (x, y), _ = cifar10.load_data()
 
+print(x.shape)
+
 def filter_resize(category):
    # We do the preprocessing here instead in the Generator to get around a bug on Keras 2.1.5.
    return [preprocess_input(imresize(img, (224,224)).astype('float')) for img in x[y.flatten()==category][:records_per_class]]

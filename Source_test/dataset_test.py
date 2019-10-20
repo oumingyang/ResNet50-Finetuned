@@ -24,4 +24,5 @@ if __name__ == '__main__':
 
   # pickled train_dataset
   data, label, file_name_list = read_data(image_train_record_file, image_train_path, shape=32)
+
   pickled(dataset_train_save_path, data, label, file_name_list, bin_num = 1, mode="train")

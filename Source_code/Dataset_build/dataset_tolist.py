@@ -39,6 +39,7 @@ def read_data(filename, data_path, shape=None, color='RGB'):
         s, c = SHAPE, CHANNEL_LEN
         file_list = []
         label_list = []
+        dataset_array = np.zeros((0, 0), dtype = np.uint8)
 
         for i in range(len(json_data)):
 
@@ -46,19 +47,25 @@ def read_data(filename, data_path, shape=None, color='RGB'):
             label = json_data[i]["label"]
             filename = json_data[i]["file_name"]
             count = len(filename)
+            data_array = "data_" + category
+            data_array = np.zeros((count, DATA_LEN), dtype = np.uint8)
             image_data_path = os.path.join(data_path, category)
-            print(image_data_path)
-            for i in range(count):
-                category_file = category + "_" + filename[i]
-                file_list.append(category_file) 
-                data = np.zeros((count, DATA_LEN), dtype = np.uint8)
-                im = imread(os.path.join(image_data_path, filename[i]), shape=s, color='RGB')
-                data[i,:c] =  np.reshape(im[:,:,0], c)
-                data[i, c:2*c] = np.reshape(im[:,:,1], c)
-                data[i, 2*c:] = np.reshape(im[:,:,2], c)
+            
+            for index in range(count):
+                category_file = category + "_" + filename[index]
+                file_list.append(category_file)               
+                im = imread(os.path.join(image_data_path, filename[index]), shape=s, color='RGB')
+                data_array[index,:c] =  np.reshape(im[:,:,0], c)
+                data_array[index, c:2*c] = np.reshape(im[:,:,1], c)
+                data_array[index, 2*c:] = np.reshape(im[:,:,2], c)
                 label_list.append(label)
+            if i==0:
+                dataset_array = data_array
+            else:
+                dataset_array = np.concatenate((dataset_array, data_array))  
+    
 
-    return data, label_list, file_list
+    return dataset_array, label_list, file_list
 
 if __name__ == "__main__":
 
