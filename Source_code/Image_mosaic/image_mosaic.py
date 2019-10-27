@@ -81,7 +81,3 @@ for rect['y'] in range(0,rows,y_height):
         suffix = "fzm_mosaic" + str(rect['y']) + "_" + str(rect['x']) + ".jpg" 
         fzm_mosaic = os.path.join(os.path.abspath(fzm_mosaic_path + os.path.sep), suffix)
         cv2.imwrite(fzm_mosaic,src_copy)
-
-        # cv2.imshow('result',src_copy)
-        # cv2.waitKey()
-        # cv2.destroyAllWindows()
